@@ -14,8 +14,8 @@ func ensureDir(path string) error {
 	return os.MkdirAll(path, os.ModePerm)
 }
 
-func createLink(src, dest string) error {
-	return os.Link(src, dest)
+func moveFile(src, dest string) error {
+	return os.Rename(src, dest)
 }
 
 func processHashFiles(srcDir, destDir string, fileName string) error {
@@ -28,7 +28,7 @@ func processHashFiles(srcDir, destDir string, fileName string) error {
 	}
 
 	srcPath := filepath.Join(srcDir, fileName)
-	return createLink(srcPath, destPath)
+	return moveFile(srcPath, destPath)
 }
 
 func processOrdinalFiles(srcDir, destDir string, fileName string) error {
@@ -46,7 +46,7 @@ func processOrdinalFiles(srcDir, destDir string, fileName string) error {
 	}
 
 	srcPath := filepath.Join(srcDir, fileName)
-	return createLink(srcPath, destPath)
+	return moveFile(srcPath, destPath)
 }
 
 func isHashName(fileName string) bool {
